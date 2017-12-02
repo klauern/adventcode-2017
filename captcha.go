@@ -5,16 +5,48 @@ import (
 )
 
 func Sum(seq string) int {
-	return 0
+	var summable []int
+	for v, _ := range seq[1:] {
+		if IsSame(rune(seq[v]), rune(seq[v-1])) {
+			summable = append(summable, Convert(rune(seq[v])))
+		}
+	}
+
+	// check last digit against first (circular)
+	if IsSame(rune(seq[len(seq)-1]), rune(seq[0])) {
+		summable = append(summable, Convert(rune(seq[0])))
+	}
+
+	sum := 0
+	for _, v := range summable {
+		sum += v
+	}
+	return sum
 }
 
-func SumChars(prev, cur rune) int {
+func IsSame(prev, cur rune) bool {
 	if prev == cur {
-		dig, err := strconv.Atoi(strconv.QuoteRune(prev))
-		if err != nil {
-			return 0
-		}
-		return dig
+		return true
 	}
-	return 0
+	return false
+}
+
+func Convert(digit rune) int {
+	d, err := strconv.Atoi(string(digit))
+	if err != nil {
+		return 0
+	}
+	return d
+}
+
+func SumChars(first, second rune) int {
+	f, err := strconv.Atoi(string(first))
+	if err != nil {
+		return 0
+	}
+	s, err := strconv.Atoi(string(second))
+	if err != nil {
+		return 0
+	}
+	return f + s
 }

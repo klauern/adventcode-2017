@@ -1,6 +1,8 @@
 package day1
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSum(t *testing.T) {
 	type args struct {
@@ -36,6 +38,36 @@ func TestSum(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Sum(tt.args.seq); got != tt.want {
 				t.Errorf("Sum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestSumChars(t *testing.T) {
+	type args struct {
+		prev rune
+		cur  rune
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			"11",
+			args{rune("11"[0]), rune("11"[1])},
+			2,
+		},
+		{
+			"23",
+			args{rune("23"[0]), rune("23"[1])},
+			5,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := SumChars(tt.args.prev, tt.args.cur); got != tt.want {
+				t.Errorf("SumChars() = %v, want %v", got, tt.want)
 			}
 		})
 	}
