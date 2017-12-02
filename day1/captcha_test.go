@@ -1,6 +1,7 @@
 package day1
 
 import (
+	"io/ioutil"
 	"testing"
 )
 
@@ -71,4 +72,12 @@ func TestSumChars(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestInput(t *testing.T) {
+	b, err := ioutil.ReadFile("input")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("Sum is %d", Sum(string(b)))
 }
