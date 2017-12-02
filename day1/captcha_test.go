@@ -44,6 +44,10 @@ func TestSumSequence(t *testing.T) {
 	}
 }
 
+func TestSumSequenceMod2(t *testing.T) {
+
+}
+
 func TestSumChars(t *testing.T) {
 	type args struct {
 		prev rune
