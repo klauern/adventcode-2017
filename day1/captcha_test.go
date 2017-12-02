@@ -44,10 +44,6 @@ func TestSumSequence(t *testing.T) {
 	}
 }
 
-func TestSumSequenceMod2(t *testing.T) {
-
-}
-
 func TestSumChars(t *testing.T) {
 	type args struct {
 		prev rune
@@ -84,4 +80,84 @@ func TestInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Logf("Sum is %d", SumSequence(string(b)))
+}
+
+func TestSumRange(t *testing.T) {
+	type args struct {
+		summable []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+	// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := SumRange(tt.args.summable); got != tt.want {
+				t.Errorf("SumRange() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestIsSame(t *testing.T) {
+	type args struct {
+		prev rune
+		cur  rune
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			"ab no",
+			args{'a', 'b'},
+			false,
+		},
+		{
+			"aa yes",
+			args{'a', 'a'},
+			true,
+		},
+		{
+			"12 no",
+			args{'1', '2'},
+			false,
+		},
+		{
+			"11 yes",
+			args{'1', '1'},
+			true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := IsSame(tt.args.prev, tt.args.cur); got != tt.want {
+				t.Errorf("IsSame() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestConvert(t *testing.T) {
+	type args struct {
+		digit rune
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+	// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Convert(tt.args.digit); got != tt.want {
+				t.Errorf("Convert() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
