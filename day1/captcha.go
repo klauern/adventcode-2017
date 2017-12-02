@@ -63,3 +63,9 @@ func SumChars(first, second rune) int {
 	}
 	return f + s
 }
+
+// SumSequenceMod2 is like SumSequence, but will sum and calculate based on the second part of the
+// puzzle.
+func SumSequenceMod2(seq string) int {
+	return 0
+}
