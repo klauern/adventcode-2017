@@ -6,17 +6,26 @@ import (
 
 func Sum(seq string) int {
 	var summable []int
-	for v, _ := range seq[1:] {
-		if IsSame(rune(seq[v]), rune(seq[v-1])) {
-			summable = append(summable, Convert(rune(seq[v])))
+	for v := 1; v < len(seq); v++ {
+		second := rune(seq[v])
+		first := rune(seq[v-1])
+		if IsSame(first, second) {
+			summable = append(summable, Convert(second))
 		}
 	}
 
 	// check last digit against first (circular)
-	if IsSame(rune(seq[len(seq)-1]), rune(seq[0])) {
-		summable = append(summable, Convert(rune(seq[0])))
+	first := rune(seq[0])
+	last := rune(seq[len(seq)-1])
+	if IsSame(first, last) {
+		summable = append(summable, Convert(last))
 	}
 
+	return SumRange(summable)
+
+}
+
+func SumRange(summable []int) int {
 	sum := 0
 	for _, v := range summable {
 		sum += v
