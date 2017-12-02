@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestSum(t *testing.T) {
+func TestSumSequence(t *testing.T) {
 	type args struct {
 		seq string
 	}
@@ -37,7 +37,7 @@ func TestSum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Sum(tt.args.seq); got != tt.want {
+			if got := SumSequence(tt.args.seq); got != tt.want {
 				t.Errorf("Sum() = %v, want %v", got, tt.want)
 			}
 		})
@@ -79,5 +79,5 @@ func TestInput(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("Sum is %d", Sum(string(b)))
+	t.Logf("Sum is %d", SumSequence(string(b)))
 }

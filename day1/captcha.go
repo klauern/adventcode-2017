@@ -4,7 +4,7 @@ import (
 	"strconv"
 )
 
-func Sum(seq string) int {
+func SumSequence(seq string) int {
 	var summable []int
 	for v := 1; v < len(seq); v++ {
 		second := rune(seq[v])
