@@ -8,24 +8,8 @@ import (
 // is the same as the previous one, then it can be summed.  The collection of these
 // is summed together.
 func SumSequence(seq string) int {
-	var summable []int
-	for v := 1; v < len(seq); v++ {
-		second := rune(seq[v])
-		first := rune(seq[v-1])
-		if IsSame(first, second) {
-			summable = append(summable, Convert(second))
-		}
-	}
-
-	// check last digit against first (circular)
-	first := rune(seq[0])
-	last := rune(seq[len(seq)-1])
-	if IsSame(first, last) {
-		summable = append(summable, Convert(last))
-	}
-
-	return SumRange(summable)
-
+	jump := 1
+	return SumOverRange(seq, jump)
 }
 
 // SumRange takes an array of []int's and sums them.
@@ -64,8 +48,23 @@ func SumChars(first, second rune) int {
 	return f + s
 }
 
+// SumOverRange implements part 2 of the day 1 stuff.
+func SumOverRange(seq string, jump int) int {
+	var summable []int
+	l := len(seq)
+	for i := 0; i < l; i++ {
+		first := rune(seq[i])
+		second := rune(seq[(i+jump)%l])
+		if first == second {
+			summable = append(summable, Convert(first))
+		}
+	}
+	return SumRange(summable)
+}
+
 // SumSequenceMod2 is like SumSequence, but will sum and calculate based on the second part of the
 // puzzle.
 func SumSequenceMod2(seq string) int {
-	return 0
+	jump := len(seq) / 2
+	return SumOverRange(seq, jump)
 }

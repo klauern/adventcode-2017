@@ -1,6 +1,7 @@
 package day1
 
 import (
+	"fmt"
 	"io/ioutil"
 	"testing"
 )
@@ -74,12 +75,13 @@ func TestSumChars(t *testing.T) {
 	}
 }
 
-func TestInput(t *testing.T) {
+func TestSumSequenceWithInput(t *testing.T) {
 	b, err := ioutil.ReadFile("input")
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Logf("Sum is %d", SumSequence(string(b)))
+	fmt.Printf("Sum of 'input' is %d\n", SumSequence(string(b)))
 }
 
 func TestSumRange(t *testing.T) {
@@ -160,4 +162,78 @@ func TestConvert(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestSumOverRange(t *testing.T) {
+	type args struct {
+		seq  string
+		jump int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+	// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := SumOverRange(tt.args.seq, tt.args.jump); got != tt.want {
+				t.Errorf("SumOverRange() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestSumSequenceMod2(t *testing.T) {
+	type args struct {
+		seq string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			"1212",
+			args{"1212"},
+			6,
+		},
+		{
+			"1221",
+			args{"1221"},
+			0,
+		},
+		{
+			"123425",
+			args{"123425"},
+			4,
+		},
+		{
+			"123123",
+			args{"123123"},
+			12,
+		},
+		{
+			"12131415",
+			args{"12131415"},
+			4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := SumSequenceMod2(tt.args.seq); got != tt.want {
+				t.Errorf("SumSequenceMod2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestSumSequenceMod2WithInput(t *testing.T) {
+	b, err := ioutil.ReadFile("input")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("Sum is %d", SumSequenceMod2(string(b)))
+	fmt.Printf("Sum of 'input' for Mod2 is %d\n", SumSequenceMod2(string(b)))
 }
