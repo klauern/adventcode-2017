@@ -136,3 +136,90 @@ func Test_checksumString(t *testing.T) {
 		})
 	}
 }
+
+func Test_findEvenlyDivisible(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			"5 9 2 8",
+			args{"5	9	2	8"},
+			[]int{2, 8},
+		},
+		{
+			"9 4 7 3",
+			args{"9	4	7	3"},
+			[]int{9, 3},
+		},
+		{
+			"3 8 6 5",
+			args{"3	8	6	5"},
+			[]int{3, 6},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := findEvenlyDivisible(tt.args.str); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("findEvenlyDivisible() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_getDivisibleChecksumForLine(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			"5 9 2 8",
+			args{"5	9	2	8"},
+			4,
+		},
+		{
+			"9 4 7 3",
+			args{"9	4	7	3"},
+			3,
+		},
+		{
+			"3 8 6 5",
+			args{"3	8	6	5"},
+			2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getDivisibleChecksumForLine(tt.args.str); got != tt.want {
+				t.Errorf("getDivisibleChecksum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_getDivisibleChecksumFromInput(t *testing.T) {
+	tests := []struct {
+		name string
+		want int
+	}{
+		{
+			"input",
+			226,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getDivisibleChecksumFromInput(); got != tt.want {
+				t.Errorf("getDivisibleChecksumFromInput() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
