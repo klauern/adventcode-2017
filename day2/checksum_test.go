@@ -100,7 +100,7 @@ func TestChecksumInput(t *testing.T) {
 	}{
 		{
 			"sample",
-			-1,
+			41887,
 		},
 	}
 	for _, tt := range tests {
@@ -108,6 +108,30 @@ func TestChecksumInput(t *testing.T) {
 			if got := ChecksumInput(); got != tt.want {
 				t.Logf("ChecksumInput() = %v", got)
 				t.Errorf("ChecksumInput() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_checksumString(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			"spreadsheet",
+			args{spreadsheet},
+			18,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := checksumString(tt.args.str); got != tt.want {
+				t.Errorf("checksumString() = %v, want %v", got, tt.want)
 			}
 		})
 	}
