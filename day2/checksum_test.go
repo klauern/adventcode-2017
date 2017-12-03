@@ -16,17 +16,17 @@ func TestDifferenceLargestSmallest(t *testing.T) {
 	}{
 		{
 			"5 1 9 5",
-			args{"5 1 9 5"},
+			args{"5	1	9	5"},
 			8,
 		},
 		{
 			"7 5 3",
-			args{"7 5 3"},
+			args{"7	5	3"},
 			4,
 		},
 		{
 			"2 4 6 8",
-			args{"2 4 6 8"},
+			args{"2	4	6	8"},
 			6,
 		},
 	}
@@ -41,7 +41,8 @@ func TestDifferenceLargestSmallest(t *testing.T) {
 
 func Test_parseLine(t *testing.T) {
 	type args struct {
-		line string
+		line    string
+		splitBy string
 	}
 	tests := []struct {
 		name string
@@ -50,23 +51,23 @@ func Test_parseLine(t *testing.T) {
 	}{
 		{
 			"7 5 3",
-			args{"7 5 3"},
+			args{"7 5 3", " "},
 			[]int{7, 5, 3},
 		},
 		{
 			"2 4 6 8",
-			args{"2 4 6 8"},
+			args{"2 4 6 8", " "},
 			[]int{2, 4, 6, 8},
 		},
 		{
 			"5 1 9 5",
-			args{"5 1 9 5"},
+			args{"5 1 9 5", " "},
 			[]int{5, 1, 9, 5},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := parseLine(tt.args.line); !reflect.DeepEqual(got, tt.want) {
+			if got := parseLine(tt.args.line, tt.args.splitBy); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("parseLine() = %v, want %v", got, tt.want)
 			}
 		})
@@ -97,11 +98,15 @@ func TestChecksumInput(t *testing.T) {
 		name string
 		want int
 	}{
-	// TODO: Add test cases.
+		{
+			"sample",
+			-1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := ChecksumInput(); got != tt.want {
+				t.Logf("ChecksumInput() = %v", got)
 				t.Errorf("ChecksumInput() = %v, want %v", got, tt.want)
 			}
 		})
