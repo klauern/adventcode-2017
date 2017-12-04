@@ -2,6 +2,7 @@ package day4
 
 import (
 	"io/ioutil"
+	"reflect"
 	"strings"
 )
 
@@ -47,10 +48,42 @@ func Part1Test() int {
 	return validPassPhrases
 }
 
+type phraseAgram []map[rune]int
+
+func isAnagram(first, second map[rune]int) bool {
+	return reflect.DeepEqual(first, second)
+}
+
+func makeGram(word string) map[rune]int {
+	w := make(map[rune]int)
+	for _, v := range word {
+		w[rune(v)]++
+	}
+	return w
+}
+
+func makePhraseAgram(phrase string) phraseAgram {
+	words := strings.Split(phrase, " ")
+	gram := make(phraseAgram, len(words))
+	for _, v := range words {
+		gram = append(gram, makeGram(v))
+	}
+	return gram
+}
+
 // ValidPassPhraseNoAnagrams does the part 2 check where anagrams must have
 // all of the characters needed.
 func ValidPassPhraseNoAnagrams(str string) bool {
-	return false
+
+	gram := makePhraseAgram(str)
+	for i := 0; i < len(gram)-1; i++ {
+		for j := i + 1; j < len(gram); j++ {
+			if isAnagram(gram[i], gram[j]) {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 // Part2Test performs the part test.
