@@ -8,7 +8,7 @@
             "type": "go",
             "request": "launch",
             "mode": "test",
-            "program": "${workspaceRoot}"
+            "program": "${workspaceRoot}/day4"
         },
         {
             "name": "Launch",
