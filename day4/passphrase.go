@@ -49,9 +49,8 @@ func Part1Test() int {
 
 // ValidPassPhraseNoAnagrams does the part 2 check where anagrams must have
 // all of the characters needed.
-func ValidPassPhraseNoAnagrams(str v) bool {
+func ValidPassPhraseNoAnagrams(str string) bool {
 	return false
-
 }
 
 // Part2Test performs the part test.

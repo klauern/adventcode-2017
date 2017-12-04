@@ -91,3 +91,66 @@ func TestPart1Test(t *testing.T) {
 		})
 	}
 }
+
+func TestValidPassPhraseNoAnagrams(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			"abcde fghij",
+			args{"abcde fghij"},
+			true,
+		},
+		{
+			"abcde xyz ecdab",
+			args{"abcde xyz ecdab"},
+			false,
+		},
+		{
+			"a ab abc abd abf abj",
+			args{"a ab abc abd abf abj"},
+			true,
+		},
+		{
+			"iiii oiii ooii oooi oooo",
+			args{"iiii oiii ooii oooi oooo"},
+			true,
+		},
+		{
+			"oiii ioii iioi iiio",
+			args{"oiii ioii iioi iiio"},
+			false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ValidPassPhraseNoAnagrams(tt.args.str); got != tt.want {
+				t.Errorf("ValidPassPhraseNoAnagrams() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestPart2Test(t *testing.T) {
+	tests := []struct {
+		name string
+		want int
+	}{
+		{
+			"input.txt",
+			-1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Part2Test(); got != tt.want {
+				t.Errorf("Part2Test() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
