@@ -46,3 +46,27 @@ func Part1Test() int {
 	}
 	return validPassPhrases
 }
+
+// ValidPassPhraseNoAnagrams does the part 2 check where anagrams must have
+// all of the characters needed.
+func ValidPassPhraseNoAnagrams(str v) bool {
+	return false
+
+}
+
+// Part2Test performs the part test.
+func Part2Test() int {
+	f, err := ioutil.ReadFile("./input.txt")
+	if err != nil {
+		return -1
+	}
+
+	lines := strings.Split(string(f), "\n")
+	validPassPhrases := 0
+	for _, v := range lines {
+		if ValidPassPhraseNoAnagrams(v) {
+			validPassPhrases++
+		}
+	}
+	return validPassPhrases
+}
