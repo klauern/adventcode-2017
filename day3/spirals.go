@@ -6,14 +6,15 @@ func GenerateSpiral(size int) [][]int {
 	return [][]int{}
 }
 
-type position struct {
+// Position is an (x,y) coordinate type.
+type Position struct {
 	x,
 	y int
 }
 
 // PositionLocation provides the x,y coordinate for a given number.
-func PositionLocation(pos int) position {
-	return position{0, 0}
+func PositionLocation(pos int) Position {
+	return Position{0, 0}
 }
 
 // StepsFromSpiral calculates the number of steps from a given number in the spiral to

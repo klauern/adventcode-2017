@@ -71,27 +71,27 @@ func TestPositionLocation(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want position
+		want Position
 	}{
 		{
 			"1",
 			args{1},
-			position{0, 0},
+			Position{0, 0},
 		},
 		{
 			"12",
 			args{12},
-			position{1, 1},
+			Position{1, 1},
 		},
 		{
 			"23",
 			args{23},
-			position{0, -2},
+			Position{0, -2},
 		},
 		{
 			"1024",
 			args{1024},
-			position{0, 0},
+			Position{-23, 0},
 		},
 	}
 	for _, tt := range tests {
