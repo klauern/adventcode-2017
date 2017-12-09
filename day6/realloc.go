@@ -7,3 +7,6 @@ func NumReallocsCycle(mem []int) int {
 	return -1
 }
 
+func reallocateSegments(mem []int) []int {
+	return []int{}
+}
