@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+var testTree = makeTree(parseInput(testInput))
+
 func Test_parseLine(t *testing.T) {
 	type args struct {
 		line string
@@ -120,8 +122,8 @@ func Test_tree_findRoot(t *testing.T) {
 	}{
 		{
 			"testAnswer",
-			makeTree(parseInput(testInput)),
-			makeTree(parseInput(testInput))["tknk"],
+			testTree,
+			testTree["tknk"],
 		},
 		{
 			"part 1",
@@ -133,6 +135,64 @@ func Test_tree_findRoot(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := tt.t.findRoot(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("tree.findRoot() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_getFileString(t *testing.T) {
+	type args struct {
+		input string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+	// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getFileString(tt.args.input); got != tt.want {
+				t.Errorf("getFileString() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_tree_calcTotalWeight(t *testing.T) {
+	type args struct {
+		prog program
+	}
+	tests := []struct {
+		name string
+		t    tree
+		args args
+		want int
+	}{
+		{
+			"ugml",
+			testTree,
+			args{testTree["ugml"]},
+			251,
+		},
+		{
+			"padx",
+			testTree,
+			args{testTree["padx"]},
+			243,
+		},
+		{
+			"fwft",
+			testTree,
+			args{testTree["fwft"]},
+			243,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.t.calcTotalWeight(tt.args.prog); got != tt.want {
+				t.Errorf("tree.calcTotalWeight() = %v, want %v", got, tt.want)
 			}
 		})
 	}

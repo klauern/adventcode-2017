@@ -108,3 +108,11 @@ func (t tree) findRoot() program {
 	}
 	return program{}
 }
+
+func (t tree) calcTotalWeight(prog program) int {
+	weight := prog.weight
+	for _, v := range prog.children {
+		weight += t.calcTotalWeight(t[v])
+	}
+	return weight
+}
