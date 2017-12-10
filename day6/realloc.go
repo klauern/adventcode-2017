@@ -11,7 +11,7 @@ func NumReallocsCycle(mem memory) int {
 }
 
 func reallocateSegments(mem memory) memory {
-	return []int{}
+	return memory{}
 }
 
 func (m memory) maxIdx() int {
