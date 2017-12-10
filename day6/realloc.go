@@ -1,15 +1,16 @@
 package day6
 
 type memory []int
+type memMap map[string]bool
 
 // NumReallocsCycle will calculate part 1 of the chore, where we determine the
 // number of memory reallocations that are needed before we see our first
 // repetition.
-func NumReallocsCycle(mem []int) int {
+func NumReallocsCycle(mem memory) int {
 	return -1
 }
 
-func reallocateSegments(mem []int) []int {
+func reallocateSegments(mem memory) memory {
 	return []int{}
 }
 

@@ -7,7 +7,7 @@ import (
 
 func TestNumReallocsCycle(t *testing.T) {
 	type args struct {
-		mem []int
+		mem memory
 	}
 	tests := []struct {
 		name string
@@ -25,37 +25,37 @@ func TestNumReallocsCycle(t *testing.T) {
 
 func Test_reallocateSegments(t *testing.T) {
 	type args struct {
-		mem []int
+		mem memory
 	}
 	tests := []struct {
 		name string
 		args args
-		want []int
+		want memory
 	}{
 		{
 			"step 1",
-			args{[]int{0, 2, 7, 0}},
-			[]int{2, 4, 1, 2},
+			args{memory{0, 2, 7, 0}},
+			memory{2, 4, 1, 2},
 		},
 		{
 			"step 2",
-			args{[]int{2, 4, 1, 2}},
-			[]int{3, 1, 2, 3},
+			args{memory{2, 4, 1, 2}},
+			memory{3, 1, 2, 3},
 		},
 		{
 			"step 3",
-			args{[]int{3, 1, 2, 3}},
-			[]int{0, 2, 3, 4},
+			args{memory{3, 1, 2, 3}},
+			memory{0, 2, 3, 4},
 		},
 		{
 			"step 4",
-			args{[]int{0, 2, 3, 4}},
-			[]int{1, 3, 4, 1},
+			args{memory{0, 2, 3, 4}},
+			memory{1, 3, 4, 1},
 		},
 		{
 			"step 5 (first repetition)",
-			args{[]int{1, 3, 4, 1}},
-			[]int{2, 4, 1, 2},
+			args{memory{1, 3, 4, 1}},
+			memory{2, 4, 1, 2},
 		},
 	}
 	for _, tt := range tests {
