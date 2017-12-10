@@ -66,3 +66,29 @@ func Test_reallocateSegments(t *testing.T) {
 		})
 	}
 }
+
+func Test_memory_maxIdx(t *testing.T) {
+	tests := []struct {
+		name string
+		m    memory
+		want int
+	}{
+		{
+			"step 1",
+			memory{0, 2, 3, 4},
+			3,
+		},
+		{
+			"step 2",
+			memory{2, 4, 1, 2},
+			1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.m.maxIdx(); got != tt.want {
+				t.Errorf("memory.maxIdx() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
