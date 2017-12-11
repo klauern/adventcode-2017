@@ -116,3 +116,19 @@ func (t tree) calcTotalWeight(prog program) int {
 	}
 	return weight
 }
+
+func (t tree) isBalanced(prog program) bool {
+	weight := t[prog.children[0]].weight
+	for i := 1; i < len(prog.children); i++ {
+		if weight != t[prog.children[i]].weight {
+			return false
+		}
+	}
+	return true
+}
+
+func (t tree) getUnbalancedImmediateChild(prog program) program {
+	for _, name := range prog.children {
+
+	}
+}
