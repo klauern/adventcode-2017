@@ -5,6 +5,11 @@ import (
 	"testing"
 )
 
+const testInput = `b inc 5 if a > 1
+a inc 1 if b < 5
+c dec -10 if a >= 1
+c inc -20 if c == 10`
+
 func Test_newComparator(t *testing.T) {
 	type args struct {
 		comp string
@@ -134,6 +139,52 @@ func Test_registers_evaluate(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := tt.r.evaluate(tt.args.comp); got != tt.want {
 				t.Errorf("registers.evaluate() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_createRegister(t *testing.T) {
+	type args struct {
+		input string
+	}
+	tests := []struct {
+		name string
+		args args
+		want registers
+	}{
+		{
+			"input",
+			args{testInput},
+			registers{
+				"a": 1,
+				"c": -10,
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := createRegister(tt.args.input); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("createRegister() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_createRegisterWithFile(t *testing.T) {
+	tests := []struct {
+		name string
+		want registers
+	}{
+		{
+			"test input",
+			registers{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := createRegisterWithFile(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("createRegisterWithFile() = %v, want %v", got, tt.want)
 			}
 		})
 	}

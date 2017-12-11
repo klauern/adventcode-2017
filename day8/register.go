@@ -1,6 +1,7 @@
 package day8
 
 import (
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
@@ -123,4 +124,27 @@ func (r registers) evaluate(comp comparison) bool {
 	default:
 		return false
 	}
+}
+
+func createRegister(input string) registers {
+	lines := strings.Split(input, "\n")
+	instructions := make([]instruction, len(lines))
+	for i, line := range lines {
+		instructions[i] = newInstruction(line)
+	}
+
+	reg := make(registers)
+	for _, instruction := range instructions {
+		reg.execute(instruction)
+	}
+
+	return reg
+}
+
+func createRegisterWithFile() registers {
+	file, err := ioutil.ReadFile("input.txt")
+	if err != nil {
+		return registers{}
+	}
+	return createRegister(string(file))
 }
