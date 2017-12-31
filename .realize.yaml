@@ -1,0 +1,47 @@
+settings:
+  files:
+    outputs:
+      status: false
+      path: ""
+      name: .r.outputs.log
+    logs:
+      status: false
+      path: ""
+      name: .r.logs.log
+    errors:
+      status: false
+      path: ""
+      name: .r.errors.log
+  legacy:
+    force: false
+    interval: 0s
+server:
+  status: true
+  open: true
+  port: 5002
+  host: localhost
+schema:
+- name: C:\Users\klauer\go\src\github.com\klauern\adventcode-2017
+  path: C:\Users\klauer\go\src\github.com\klauern\adventcode-2017
+  commands:
+    clean:
+      status: true
+    vet:
+      status: true
+    fmt:
+      status: true
+    test:
+      status: true
+    install:
+      status: true
+    build:
+      status: true
+  watcher:
+    paths:
+    - /
+    extensions:
+    - go
+    ignored_paths:
+    - .git
+    - .realize
+    - vendor
